@@ -1,6 +1,7 @@
 import { TransferService } from './transfer.service';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import io from 'socket.io-client';
+import { Router } from '@angular/router';
 
 export interface JoinedSession {
   username: string;
@@ -33,7 +34,10 @@ export class HomeCompnent {
   @Input() username: string = '';
   @Input() roomname: string = '';
   @Output() joinChat = new EventEmitter();
-  constructor(private transferService: TransferService) {}
+  constructor(
+    private transferService: TransferService,
+    private router: Router
+  ) {}
 
   onNameChange($event: any) {
     this.username = $event.target.value;
@@ -59,6 +63,7 @@ export class HomeCompnent {
         username: this.username,
         roomname: this.roomname,
       });
+      this.router.navigateByUrl('chat');
     } else {
       alert('username and roomname cannot be empty !');
       window.location.reload();
