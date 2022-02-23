@@ -5,24 +5,24 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './chat.component.html',
 
   template: `
-  <div className="chat">
-      <div className="user-name">
+  <div class="chat">
+      <div class="user-name">
         <h2>
-          {username} <span style={{ fontSize: "0.7rem" }}>in {roomname}</span>
+          {{username}} <span style={{ fontSize: "0.7rem" }}>in {{roomname}}</span>
         </h2>
       </div>
-      <div className="chat-message">
+      <div class="chat-message">
         {messages.map((msg) => {
           if (msg.username === username) {
             return (
-              <div key={msg.timestamp} className="message">
+              <div key={msg.timestamp} class="message">
                 <p>{msg.text}</p>
                 <span>{msg.username}</span>
               </div>
             );
           } else {
             return (
-              <div key={msg.timestamp} className="message mess-right">
+              <div key={msg.timestamp} class="message mess-right">
                 <p>{msg.text} </p>
                 <span>{msg.username}</span>
               </div>
@@ -31,7 +31,7 @@ import { Component, OnInit } from '@angular/core';
         })}
         <div ref={messagesEndRef} />
       </div>
-      <div className="send">
+      <div class="send">
         <input
           placeholder="enter your message"
           value={text}
