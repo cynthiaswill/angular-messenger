@@ -1,4 +1,4 @@
-import { HomeCompnent } from './home-component';
+import { HomeCompnent } from './home.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 

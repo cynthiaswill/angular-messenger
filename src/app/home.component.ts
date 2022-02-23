@@ -9,7 +9,7 @@ interface JoinedSession {
 @Component({
   selector: 'home',
   template: `
-    <div>
+    <div class="homepage">
       <h1>Welcome to Angular Chat</h1>
       <input
         type="text"
@@ -26,6 +26,7 @@ interface JoinedSession {
       <button (click)="onClick()">Join</button>
     </div>
   `,
+  styleUrls: [`./home.component.css`],
 })
 export class HomeCompnent {
   @Input() username: string = '';
