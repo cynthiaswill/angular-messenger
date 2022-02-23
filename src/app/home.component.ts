@@ -50,19 +50,15 @@ export class HomeCompnent {
   }
 
   onClick() {
+    const data: JoinedSession = {
+      username: this.username,
+      roomname: this.roomname,
+    };
+    console.log(data);
     if (this.username !== '' && this.roomname !== '') {
-      io().emit('joinRoom', <JoinedSession>{
-        username: this.username,
-        roomname: this.roomname,
-      });
-      this.joinChat.emit(<JoinedSession>{
-        username: this.username,
-        roomname: this.roomname,
-      });
-      this.transferService.setData(<JoinedSession>{
-        username: this.username,
-        roomname: this.roomname,
-      });
+      io().emit('joinRoom', data);
+      this.joinChat.emit(data);
+      this.transferService.setData(data);
       this.router.navigateByUrl('chat');
     } else {
       alert('username and roomname cannot be empty !');
