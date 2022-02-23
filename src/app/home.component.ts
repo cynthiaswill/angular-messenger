@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import io from 'socket.io-client';
 
-interface JoinedSession {
+export interface JoinedSession {
   username: string;
   roomname: string;
 }
@@ -31,6 +31,7 @@ interface JoinedSession {
 export class HomeCompnent {
   @Input() username: string = '';
   @Input() roomname: string = '';
+  @Output() joinChat = new EventEmitter();
 
   onNameChange($event: any) {
     this.username = $event.target.value;
@@ -45,6 +46,10 @@ export class HomeCompnent {
   onClick() {
     if (this.username !== '' && this.roomname !== '') {
       io().emit('joinRoom', <JoinedSession>{
+        username: this.username,
+        roomname: this.roomname,
+      });
+      this.joinChat.emit(<JoinedSession>{
         username: this.username,
         roomname: this.roomname,
       });

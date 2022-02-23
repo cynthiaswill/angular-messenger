@@ -1,5 +1,5 @@
 .homepage {
-  width: 500px;
+  max-width: 500px;
   height: 500px;
   padding: 2rem;
   background-color: #2d343e;
