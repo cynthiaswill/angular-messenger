@@ -7,7 +7,7 @@ const {
   user_Disconnect,
   join_User,
 } = require("./socketUser");
-const { fetchHistory } = require("./fetchHistory");
+// const { fetchHistory } = require("./fetchHistory");
 
 const app = express();
 app.use(cors());
@@ -40,9 +40,9 @@ io.on("connection", (socket) => {
     socket.join(p_user.roomname);
 
     // fetching chat history of this room
-    fetchHistory(p_user.roomname)
-      .then((data) => console.log(data, "!!"))
-      .catch(console.dir);
+    // fetchHistory(p_user.roomname)
+    //   .then((data) => console.log(data, "!!"))
+    //   .catch(console.dir);
 
     //display a welcome message to the user who have joined a room
     socket.emit("message", {
