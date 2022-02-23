@@ -1,3 +1,4 @@
+import { TransferService } from './transfer.service';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import io from 'socket.io-client';
 
@@ -32,6 +33,7 @@ export class HomeCompnent {
   @Input() username: string = '';
   @Input() roomname: string = '';
   @Output() joinChat = new EventEmitter();
+  constructor(private transferService: TransferService) {}
 
   onNameChange($event: any) {
     this.username = $event.target.value;
@@ -50,6 +52,10 @@ export class HomeCompnent {
         roomname: this.roomname,
       });
       this.joinChat.emit(<JoinedSession>{
+        username: this.username,
+        roomname: this.roomname,
+      });
+      this.transferService.setData(<JoinedSession>{
         username: this.username,
         roomname: this.roomname,
       });

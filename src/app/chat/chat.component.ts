@@ -1,3 +1,4 @@
+import { TransferService } from './../transfer.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -5,13 +6,13 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './chat.component.html',
 
   template: `
-  <div class="chat">
+    <div class="chat">
       <div class="user-name">
         <h2>
-          {{username}} <span style={{ fontSize: "0.7rem" }}>in {{roomname}}</span>
+          {{ username }} <span>in {{ roomname }}</span>
         </h2>
       </div>
-      <div class="chat-message">
+      <!-- <div class="chat-message">
         {messages.map((msg) => {
           if (msg.username === username) {
             return (
@@ -43,14 +44,15 @@ import { Component, OnInit } from '@angular/core';
           }}
         ></input>
         <button onClick={sendData}>Send</button>
-      </div>
+      </div> -->
     </div>
   `,
 
   styleUrls: ['./chat.component.css'],
 })
 export class ChatComponent implements OnInit {
-  constructor() {}
+  data = this.transferService.getData();
+  constructor(private transferService: TransferService) {}
 
   ngOnInit(): void {}
 }

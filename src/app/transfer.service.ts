@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class TransferService {
   private data: any;
   constructor() {}
+
   setData(data: any) {
     this.data = data;
   }
