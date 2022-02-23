@@ -3,13 +3,13 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'chat',
-  templateUrl: './chat.component.html',
 
   template: `
     <div class="chat">
       <div class="user-name">
         <h2>
-          {{ username }} <span>in {{ roomname }}</span>
+          {{ data.username }}
+          <span class="roomtitle">in {{ data.roomname }}</span>
         </h2>
       </div>
       <!-- <div class="chat-message">
