@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import io from 'socket.io-client';
 
 interface JoinedSession {
@@ -11,15 +11,25 @@ interface JoinedSession {
   template: `
     <div>
       <h1>Welcome to Angular Chat</h1>
-      <input type="text" [value]="username" (change)="onNameChange($event)" />
-      <input type="text" [value]="roomname" (change)="onRoomChange($event)" />
+      <input
+        type="text"
+        placeholder="Input your display name"
+        [value]="username"
+        (change)="onNameChange($event)"
+      />
+      <input
+        type="text"
+        placeholder="Input the room name"
+        [value]="roomname"
+        (change)="onRoomChange($event)"
+      />
       <button (click)="onClick()">Join</button>
     </div>
   `,
 })
 export class HomeCompnent {
-  username: string = 'display name';
-  roomname: string = 'room name';
+  @Input() username: string = '';
+  @Input() roomname: string = '';
 
   onNameChange($event: any) {
     this.username = $event.target.value;
