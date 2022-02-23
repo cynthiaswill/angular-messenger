@@ -21,7 +21,7 @@ const client = new MongoClient(uri, {
 
 app.use(express());
 
-const port = 8000;
+const port = 4200;
 
 const server = app.listen(
   port,
