@@ -1,3 +1,5 @@
+import { MessagesService } from './messages.service';
+import { TransferService } from './transfer.service';
 import { HomeCompnent } from './home.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,7 +21,7 @@ import { RouterModule } from '@angular/router';
     ]),
     HttpClientModule,
   ],
-  providers: [],
+  providers: [TransferService, MessagesService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -7,12 +7,12 @@ import { catchError, retry } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class MessagesService {
-  baseUrl: string = `nc-games-board.herokuapp.com/api`;
+  private baseUrl: string = `Https://nc-games-board.herokuapp.com/api`;
   constructor(private http: HttpClient) {}
 
-  getMessages() {
+  getMessages(roomname: string) {
     return this.http
-      .get(this.baseUrl + '/messages')
+      .get(this.baseUrl + '/messages' + `/${roomname}`)
       .subscribe((response: any) => {
         console.log(response.json());
       });
