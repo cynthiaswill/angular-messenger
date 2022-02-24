@@ -20,10 +20,10 @@ import io from 'socket.io-client';
           <span>{{ username }}</span>
         </div>
 
-        <div *ngIf="msg.username !== username" class="message mess-right">
+        <!-- <div *ngIf="msg.username !== username" class="message mess-right">
           <p>{{ msg.text }}</p>
           <span>{{ msg.username }}</span>
-        </div>
+        </div> -->
       </div>
       <div class="send">
         <input
@@ -31,7 +31,7 @@ import io from 'socket.io-client';
           [value]="text"
           (keyup)="onTextChange($event)"
         />
-        <button (click)="(onClick)">Send</button>
+        <button (click)="onClick()">Send</button>
       </div>
     </div>
   `,
@@ -43,22 +43,25 @@ export class ChatComponent implements OnInit {
   username: string = this.data.username;
   roomname: string = this.data.roomname;
   text: string = '';
-  messages: any;
+  messages: any = [];
 
   constructor(
-    private transferService: TransferService // private messagesService: MessagesService
+    private transferService: TransferService,
+    private messagesService: MessagesService
   ) {}
 
   ngOnInit(): void {
-    // this.messages = this.messagesService.getMessages(this.roomname);
+    this.messages = this.messagesService.getMessages(this.roomname);
     io().on('message', (data) => {
+      console.log(data);
       let temp = this.messages;
       temp.push({
-        username: data.username,
-        text: data.text,
+        username: this.username,
+        text: this.text,
         timestamp: new Date(),
       });
       this.messages = [...temp];
+      console.log(this.messages, 'on click messags');
     });
   }
 
