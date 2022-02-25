@@ -37,6 +37,20 @@ io.on("connection", (socket) => {
     const p_user = join_User(socket.id, username, roomname);
     console.log(socket.id, "=id");
     socket.join(p_user.roomname);
+
+    //display a welcome message to the user who have joined a room
+    socket.emit("message", {
+      userId: p_user.id,
+      username: p_user.username,
+      text: `Welcome ${p_user.username}`,
+    });
+
+    //displays a joined room message to all other room users except that particular user
+    socket.broadcast.to(p_user.roomname).emit("message", {
+      userId: p_user.id,
+      username: p_user.username,
+      text: `${p_user.username} has joined the chat`,
+    });
   });
 
   //listener#2: user sending message
