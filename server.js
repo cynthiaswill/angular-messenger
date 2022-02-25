@@ -70,7 +70,7 @@ io.on("connection", (socket) => {
         const doc = {
           username: `${p_user.username}`,
           roomName: `${p_user.roomname}`,
-          text: `${text}`,
+          messageBody: `${text}`,
           timestamp: new Date(),
         };
         const result = await history.insertOne(doc);
