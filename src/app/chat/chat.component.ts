@@ -6,35 +6,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'chat',
 
-  template: `
-    <div class="chat">
-      <div class="user-name">
-        <h2>
-          {{ username }}
-          <span class="roomtitle">in {{ roomname }}</span>
-        </h2>
-      </div>
-      <div class="chat-message" *ngFor="let msg of messages">
-        <div *ngIf="msg.username === username" class="message">
-          <p class="p-left">{{ msg.messageBody }}</p>
-          <span class="span-left">{{ username }}</span>
-        </div>
-
-        <div *ngIf="msg.username !== username" class="message mess-right">
-          <p class="p-right">{{ msg.messageBody }}</p>
-          <span class="span-right">{{ msg.username }}</span>
-        </div>
-      </div>
-      <div class="send">
-        <input
-          placeholder="enter your message"
-          [value]="messageBody"
-          (keyup)="onTextChange($event)"
-        />
-        <button (click)="onClick()">Send</button>
-      </div>
-    </div>
-  `,
+  templateUrl: './chat.component.html',
 
   styleUrls: ['./chat.component.css'],
 })
