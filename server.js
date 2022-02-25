@@ -28,7 +28,9 @@ const server = app.listen(
   console.log(`Server is running on port: ${port} `)
 );
 
-const io = socket(server, { cors: { origin: "*" } });
+const io = socket(server, {
+  cors: { origin: "https://nc-games-board.herokuapp.com/" },
+});
 
 //listener#1: initialise socket io connection
 io.on("connection", (socket) => {
