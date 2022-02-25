@@ -16,19 +16,19 @@ import { Component, OnInit } from '@angular/core';
       </div>
       <div class="chat-message" *ngFor="let msg of messages">
         <div *ngIf="msg.username === username" class="message">
-          <p class="p-left">{{ msg.text }}</p>
+          <p class="p-left">{{ msg.messageBody }}</p>
           <span class="span-left">{{ username }}</span>
         </div>
 
         <div *ngIf="msg.username !== username" class="message mess-right">
-          <p class="p-right">{{ msg.text }}</p>
+          <p class="p-right">{{ msg.messageBody }}</p>
           <span class="span-right">{{ msg.username }}</span>
         </div>
       </div>
       <div class="send">
         <input
           placeholder="enter your message"
-          [value]="text"
+          [value]="messageBody"
           (keyup)="onTextChange($event)"
         />
         <button (click)="onClick()">Send</button>
@@ -42,7 +42,7 @@ export class ChatComponent implements OnInit {
   private data: any = this.transferService.getData();
   username: string = this.data.username;
   roomname: string = this.data.roomname;
-  text: string = '';
+  messageBody: string = '';
   messages: any = [];
 
   constructor(
@@ -64,7 +64,7 @@ export class ChatComponent implements OnInit {
       let temp = this.messages;
       temp.push({
         username: data.username,
-        text: data.text,
+        messageBody: data.messageBody,
         timestamp: new Date(),
       });
       this.messages = [...temp];
@@ -72,15 +72,15 @@ export class ChatComponent implements OnInit {
   }
 
   onClick(): void {
-    console.log(this.text, 'on button click');
-    if (this.text !== '') {
-      this.socketService.socket.emit('chat', this.text);
-      this.text = '';
+    console.log(this.messageBody, 'on button click');
+    if (this.messageBody !== '') {
+      this.socketService.socket.emit('chat', this.messageBody);
+      this.messageBody = '';
     }
   }
 
   onTextChange($event: any): void {
-    this.text = $event.target.value;
-    console.log(this.text, 'on text change');
+    this.messageBody = $event.target.value;
+    console.log(this.messageBody, 'on messageBody change');
   }
 }

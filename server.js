@@ -42,23 +42,23 @@ io.on("connection", (socket) => {
     socket.emit("message", {
       userId: p_user.id,
       username: p_user.username,
-      text: `Welcome ${p_user.username}`,
+      messageBody: `Welcome ${p_user.username}`,
     });
 
     //displays a joined room message to all other room users except that particular user
     socket.broadcast.to(p_user.roomname).emit("message", {
       userId: p_user.id,
       username: p_user.username,
-      text: `${p_user.username} has joined the chat`,
+      messageBody: `${p_user.username} has joined the chat`,
     });
   });
 
   //listener#2: user sending message
-  socket.on("chat", (text) => {
+  socket.on("chat", (messageBody) => {
     //gets the room user and the message sent
     console.log(socket.id);
     const p_user = get_Current_User(socket.id);
-    console.log(p_user.username, p_user.roomname, text, "<<<<<<<<");
+    console.log(p_user.username, p_user.roomname, messageBody, "<<<<<<<<");
 
     // insert sent message into database
     async function insertIntoDB() {
@@ -70,7 +70,7 @@ io.on("connection", (socket) => {
         const doc = {
           username: `${p_user.username}`,
           roomName: `${p_user.roomname}`,
-          messageBody: `${text}`,
+          messageBody: `${messageBody}`,
           timestamp: new Date(),
         };
         const result = await history.insertOne(doc);
@@ -87,7 +87,7 @@ io.on("connection", (socket) => {
     io.to(p_user.roomname).emit("message", {
       userId: p_user.id,
       username: p_user.username,
-      text: text,
+      messageBody: messageBody,
     });
   });
 
@@ -100,7 +100,7 @@ io.on("connection", (socket) => {
       io.to(p_user.roomname).emit("message", {
         userId: p_user.id,
         username: p_user.username,
-        text: `${p_user.username} has left the chat`,
+        messageBody: `${p_user.username} has left the chat`,
       });
     }
   });
