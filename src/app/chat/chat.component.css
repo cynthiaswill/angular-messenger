@@ -26,33 +26,32 @@ h2 {
 }
 
 .chat-message {
-  height: 70%;
+  max-height: 70vh;
   overflow-y: auto;
-  @include scrollbars(5px, $backgroundColor, $yellowColor);
   display: flex;
   flex-direction: column;
   width: 100%;
+  justify-content: flex-start;
   align-content: flex-start;
 }
 
 .message {
-  margin-left: 0px;
   max-width: 220px;
-  padding-left: 0.5rem;
+  margin: 0px;
 }
 
-p {
+.p-left {
   font-size: 1rem;
-  background-color: #250202;
+  background-color: #2d343e;
   padding: 1rem;
   border-radius: 0px 10px 10px 10px;
   font-weight: 300;
   color: #b4b6be;
 }
 
-span {
-  font-size: 0.6rem;
-  font-weight: 200;
+.span-left {
+  font-size: 0.8rem;
+  font-weight: 250;
   color: #b4b6be;
   padding-left: 0.5rem;
 }
@@ -63,21 +62,22 @@ span {
   display: flex;
   flex-direction: column;
   max-width: 220px;
-  padding-right: 0.5rem;
 }
 
-p {
+.p-right {
   text-align: end;
   border-radius: 10px 0px 10px 10px;
-  background-color: red;
+  background-color: #250202;
   color: white;
 }
 
-span {
+.span-right {
   width: 100%;
   text-align: end;
-  padding-left: 0rem;
+  font-size: 0.8rem;
+  font-weight: 250;
   padding-right: 0.5rem;
+  color: #b4b6be;
 }
 .send {
   width: 100%;

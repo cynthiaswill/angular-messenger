@@ -16,14 +16,14 @@ import { Component, OnInit } from '@angular/core';
       </div>
       <div class="chat-message" *ngFor="let msg of messages">
         <div *ngIf="msg.username === username" class="message">
-          <p>{{ msg.text }}</p>
-          <span>{{ username }}</span>
+          <p class="p-left">{{ msg.text }}</p>
+          <span class="span-left">{{ username }}</span>
         </div>
 
-        <!-- <div *ngIf="msg.username !== username" class="message mess-right">
-          <p>{{ msg.text }}</p>
-          <span>{{ msg.username }}</span>
-        </div> -->
+        <div *ngIf="msg.username !== username" class="message mess-right">
+          <p class="p-right">{{ msg.text }}</p>
+          <span class="span-right">{{ msg.username }}</span>
+        </div>
       </div>
       <div class="send">
         <input
