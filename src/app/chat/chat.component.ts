@@ -47,15 +47,20 @@ export class ChatComponent implements OnInit {
 
   constructor(
     private transferService: TransferService,
-    private socketService: SocketService // private messagesService: MessagesService
+    private socketService: SocketService,
+    private messagesService: MessagesService
   ) {}
 
   ngOnInit(): void {
-    // this.messages = this.messagesService.getMessages(this.roomname);
-    // console.log(this.messages, 'on click messags');
+    this.messagesService
+      .getMessages(this.roomname)
+      .subscribe((response: any) => {
+        this.messages = response.history;
+      });
+    console.log(this.messages, 'on click messags');
 
     this.socketService.socket.on('message', (data: any) => {
-      console.log(data, 'data from get messages');
+      console.log(this.messages, 'messages on emitting');
       let temp = this.messages;
       temp.push({
         username: data.username,

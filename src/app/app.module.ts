@@ -1,3 +1,4 @@
+import { SocketService } from './socket.service';
 import { MessagesService } from './messages.service';
 import { TransferService } from './transfer.service';
 import { HomeCompnent } from './home.component';
@@ -21,7 +22,7 @@ import { RouterModule } from '@angular/router';
     ]),
     HttpClientModule,
   ],
-  providers: [TransferService, MessagesService],
+  providers: [TransferService, MessagesService, SocketService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
