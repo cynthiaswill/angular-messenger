@@ -55,7 +55,7 @@ io.on("connection", (socket) => {
         // create a document to insert
         const doc = {
           username: `${p_user.username}`,
-          roomname: `${p_user.roomname}`,
+          roomName: `${p_user.roomname}`,
           text: `${text}`,
           timestamp: new Date(),
         };
