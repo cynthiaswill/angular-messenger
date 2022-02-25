@@ -28,40 +28,21 @@ const server = app.listen(
   console.log(`Server is running on port: ${port} `)
 );
 
-const io = socket(server);
+const io = socket(server, { cors: { origin: "*" } });
 
 //listener#1: initialise socket io connection
 io.on("connection", (socket) => {
-  //for a new user joining the room
   socket.on("joinRoom", ({ username, roomname }) => {
     //* create user
     const p_user = join_User(socket.id, username, roomname);
     console.log(socket.id, "=id");
     socket.join(p_user.roomname);
-
-    // fetching chat history of this room
-    // fetchHistory(p_user.roomname)
-    //   .then((data) => console.log(data, "!!"))
-    //   .catch(console.dir);
-
-    //display a welcome message to the user who have joined a room
-    socket.emit("message", {
-      userId: p_user.id,
-      username: p_user.username,
-      text: `Welcome ${p_user.username}`,
-    });
-
-    //displays a joined room message to all other room users except that particular user
-    socket.broadcast.to(p_user.roomname).emit("message", {
-      userId: p_user.id,
-      username: p_user.username,
-      text: `${p_user.username} has joined the chat`,
-    });
   });
 
   //listener#2: user sending message
   socket.on("chat", (text) => {
     //gets the room user and the message sent
+    console.log(socket.id);
     const p_user = get_Current_User(socket.id);
     console.log(p_user.username, p_user.roomname, text, "<<<<<<<<");
 

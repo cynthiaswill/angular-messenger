@@ -1,7 +1,7 @@
+import { SocketService } from './../socket.service';
 import { MessagesService } from './../messages.service';
 import { TransferService } from './../transfer.service';
 import { Component, OnInit } from '@angular/core';
-import io from 'socket.io-client';
 
 @Component({
   selector: 'chat',
@@ -47,28 +47,29 @@ export class ChatComponent implements OnInit {
 
   constructor(
     private transferService: TransferService,
-    private messagesService: MessagesService
+    private socketService: SocketService // private messagesService: MessagesService
   ) {}
 
   ngOnInit(): void {
-    this.messages = this.messagesService.getMessages(this.roomname);
-    io().on('message', (data) => {
-      console.log(data);
+    // this.messages = this.messagesService.getMessages(this.roomname);
+    // console.log(this.messages, 'on click messags');
+
+    this.socketService.socket.on('message', (data: any) => {
+      console.log(data, 'data from get messages');
       let temp = this.messages;
       temp.push({
-        username: this.username,
-        text: this.text,
+        username: data.username,
+        text: data.text,
         timestamp: new Date(),
       });
       this.messages = [...temp];
-      console.log(this.messages, 'on click messags');
     });
   }
 
   onClick(): void {
     console.log(this.text, 'on button click');
     if (this.text !== '') {
-      io().emit('chat', this.text);
+      this.socketService.socket.emit('chat', this.text);
       this.text = '';
     }
   }

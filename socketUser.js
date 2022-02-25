@@ -5,7 +5,7 @@ function join_User(id, username, roomname) {
   const p_user = { id, username, roomname };
 
   c_users.push(p_user);
-  console.log(c_users, "users");
+  console.log(p_user, c_users, "users");
 
   return p_user;
 }
@@ -13,6 +13,7 @@ function join_User(id, username, roomname) {
 console.log("user out", c_users);
 
 function get_Current_User(id) {
+  console.log(c_users, "in get current user", id, "socket id");
   return c_users.find((p_user) => p_user.id === id);
 }
 

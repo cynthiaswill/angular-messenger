@@ -1,6 +1,6 @@
+import { SocketService } from './socket.service';
 import { TransferService } from './transfer.service';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import io from 'socket.io-client';
 import { Router } from '@angular/router';
 
 export interface JoinedSession {
@@ -17,13 +17,13 @@ export interface JoinedSession {
         type="text"
         placeholder="Input your display name"
         [value]="username"
-        (change)="onNameChange($event)"
+        (keyup)="onNameChange($event)"
       />
       <input
         type="text"
         placeholder="Input the room name"
         [value]="roomname"
-        (change)="onRoomChange($event)"
+        (keyup)="onRoomChange($event)"
       />
       <button (click)="onClick()">Join</button>
     </div>
@@ -36,6 +36,7 @@ export class HomeCompnent {
   @Output() joinChat = new EventEmitter();
   constructor(
     private transferService: TransferService,
+    private socketService: SocketService,
     private router: Router
   ) {}
 
@@ -54,9 +55,9 @@ export class HomeCompnent {
       username: this.username,
       roomname: this.roomname,
     };
-    console.log(data);
+
     if (this.username !== '' && this.roomname !== '') {
-      io().emit('joinRoom', data);
+      this.socketService.socket.emit('joinRoom', data);
       this.joinChat.emit(data);
       this.transferService.setData(data);
       this.router.navigateByUrl('chat');
