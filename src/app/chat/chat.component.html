@@ -5,17 +5,21 @@
       <span class="roomtitle">in {{ roomname }}</span>
     </h2>
   </div>
-  <div class="chat-message" *ngFor="let msg of messages">
-    <div *ngIf="msg.username === username" class="message">
-      <p class="p-left">{{ msg.messageBody }}</p>
-      <span class="span-left">{{ username }}</span>
-    </div>
 
-    <div *ngIf="msg.username !== username" class="mess-right">
-      <p class="p-right">{{ msg.messageBody }}</p>
-      <span class="span-right">{{ msg.username }}</span>
+  <div class="container">
+    <div class="chat-message" *ngFor="let msg of messages">
+      <div *ngIf="msg.username === username" class="message">
+        <p class="p-left">{{ msg.messageBody }}</p>
+        <span class="span-left">{{ username }}</span>
+      </div>
+
+      <div *ngIf="msg.username !== username" class="mess-right">
+        <p class="p-right">{{ msg.messageBody }}</p>
+        <span class="span-right">{{ msg.username }}</span>
+      </div>
     </div>
   </div>
+
   <div class="send">
     <input
       placeholder="enter your message"
