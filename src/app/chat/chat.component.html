@@ -25,6 +25,7 @@
       placeholder="enter your message"
       [value]="messageBody"
       (keyup)="onTextChange($event)"
+      (keydown.enter)="onClick()"
     />
     <button (click)="onClick()">Send</button>
   </div>
