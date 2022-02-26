@@ -1,7 +1,7 @@
 .chat {
   margin: 0 auto;
   max-width: 500px;
-  height: 600px;
+  height: 80vh;
   background-color: grey;
   padding: 1rem;
   display: flex;
@@ -32,7 +32,6 @@ h2 {
   flex-direction: column;
   width: 100%;
   justify-content: flex-start;
-  align-content: flex-start;
 }
 
 .container {
@@ -44,8 +43,11 @@ h2 {
 }
 
 .message {
+  margin-left: 0px;
+  margin-right: auto;
   max-width: 220px;
-  margin: 0px;
+  display: flex;
+  flex-direction: column;
 }
 
 .p-left {
@@ -55,6 +57,7 @@ h2 {
   border-radius: 0px 10px 10px 10px;
   font-weight: 300;
   color: white;
+  margin-bottom: 8px;
 }
 
 .span-left {
@@ -62,6 +65,7 @@ h2 {
   font-weight: 250;
   color: white;
   padding-left: 0.5rem;
+  margin-top: 0px;
 }
 
 .mess-right {
@@ -79,6 +83,7 @@ h2 {
   color: white;
   padding: 1rem;
   font-weight: 300;
+  margin-bottom: 8px;
 }
 
 .span-right {
@@ -88,6 +93,7 @@ h2 {
   font-weight: 250;
   padding-right: 0.5rem;
   color: white;
+  margin-top: 0px;
 }
 .send {
   width: 100%;
