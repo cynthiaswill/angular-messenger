@@ -13,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 export class ChatComponent implements OnInit {
   private data: any = this.transferService.getData();
   username: string = this.data.username;
-  roomname: string = this.data.roomname;
+  roomName: string = this.data.roomName;
   messageBody: string = '';
   messages: any = [];
 
@@ -25,7 +25,7 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.messagesService
-      .getMessages(this.roomname)
+      .getMessages(this.roomName)
       .subscribe((response: any) => {
         this.messages = response.history;
       });

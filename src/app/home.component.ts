@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 export interface JoinedSession {
   username: string;
-  roomname: string;
+  roomName: string;
 }
 
 @Component({
@@ -22,7 +22,7 @@ export interface JoinedSession {
       <input
         type="text"
         placeholder="Input the room name"
-        [value]="roomname"
+        [value]="roomName"
         (keyup)="onRoomChange($event)"
       />
       <button (click)="onClick()">Join</button>
@@ -32,7 +32,7 @@ export interface JoinedSession {
 })
 export class HomeCompnent {
   @Input() username: string = '';
-  @Input() roomname: string = '';
+  @Input() roomName: string = '';
   @Output() joinChat = new EventEmitter();
   constructor(
     private transferService: TransferService,
@@ -46,23 +46,23 @@ export class HomeCompnent {
   }
 
   onRoomChange($event: any) {
-    this.roomname = $event.target.value;
-    console.log('new room: ', this.roomname);
+    this.roomName = $event.target.value;
+    console.log('new room: ', this.roomName);
   }
 
   onClick() {
     const data: JoinedSession = {
       username: this.username,
-      roomname: this.roomname,
+      roomName: this.roomName,
     };
 
-    if (this.username !== '' && this.roomname !== '') {
+    if (this.username !== '' && this.roomName !== '') {
       this.socketService.socket.emit('joinRoom', data);
       this.joinChat.emit(data);
       this.transferService.setData(data);
       this.router.navigateByUrl('chat');
     } else {
-      alert('username and roomname cannot be empty !');
+      alert('username and roomName cannot be empty !');
       window.location.reload();
     }
   }
