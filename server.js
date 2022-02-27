@@ -28,7 +28,7 @@ const server = app.listen(
 );
 
 const io = socket(server, {
-  cors: { origin: "https://nc-games-board.herokuapp.com/" },
+  cors: { origin: "*" },
 });
 
 //listener#1: initialise socket io connection
