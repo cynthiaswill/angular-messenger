@@ -5,7 +5,7 @@ import io from 'socket.io-client';
   providedIn: 'root',
 })
 export class SocketService {
-  // socket: any = io('https://nc-games-board.herokuapp.com/');
-  socket: any = io('localhost:4200');
+  socket: any = io('https://nc-games-board.herokuapp.com/');
+  // socket: any = io('localhost:4200');
   constructor() {}
 }
