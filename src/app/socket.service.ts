@@ -6,6 +6,6 @@ import io from 'socket.io-client';
 })
 export class SocketService {
   // socket: any = io('https://nc-games-board.herokuapp.com/');
-  socket: any = io('localhost:9000');
+  socket: any = io('localhost:4200');
   constructor() {}
 }

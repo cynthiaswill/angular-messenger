@@ -7,7 +7,6 @@ const {
   user_Disconnect,
   join_User,
 } = require("./socketUser");
-// const { fetchHistory } = require("./fetchHistory");
 
 const app = express();
 app.use(cors());
@@ -34,11 +33,11 @@ const io = socket(server, {
 
 //listener#1: initialise socket io connection
 io.on("connection", (socket) => {
-  socket.on("joinRoom", ({ username, roomname }) => {
+  socket.on("joinRoom", ({ username, roomName }) => {
     //* create user
-    const p_user = join_User(socket.id, username, roomname);
+    const p_user = join_User(socket.id, username, roomName);
     console.log(socket.id, "=id");
-    socket.join(p_user.roomname);
+    socket.join(p_user.roomName);
   });
 
   //listener#2: user sending message
@@ -46,7 +45,7 @@ io.on("connection", (socket) => {
     //gets the room user and the message sent
     console.log(socket.id);
     const p_user = get_Current_User(socket.id);
-    console.log(p_user.username, p_user.roomname, messageBody, "<<<<<<<<");
+    console.log(p_user.username, p_user.roomName, messageBody, "<<<<<<<<");
 
     // insert sent message into database
     async function insertIntoDB() {
@@ -57,7 +56,7 @@ io.on("connection", (socket) => {
         // create a document to insert
         const doc = {
           username: `${p_user.username}`,
-          roomName: `${p_user.roomname}`,
+          roomName: `${p_user.roomName}`,
           messageBody: `${messageBody}`,
           timestamp: new Date(),
         };
@@ -72,7 +71,7 @@ io.on("connection", (socket) => {
     insertIntoDB().catch(console.dir);
 
     //emit sent messages using sockitIO
-    io.to(p_user.roomname).emit("message", {
+    io.to(p_user.roomName).emit("message", {
       userId: p_user.id,
       username: p_user.username,
       messageBody: messageBody,
@@ -85,7 +84,7 @@ io.on("connection", (socket) => {
     const p_user = user_Disconnect(socket.id);
 
     if (p_user) {
-      io.to(p_user.roomname).emit("message", {
+      io.to(p_user.roomName).emit("message", {
         userId: p_user.id,
         username: p_user.username,
         messageBody: `${p_user.username} has left the chat`,
