@@ -1,7 +1,13 @@
 import { SocketService } from './../socket.service';
 import { MessagesService } from './../messages.service';
 import { TransferService } from './../transfer.service';
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'chat',
@@ -10,7 +16,8 @@ import { Component, OnInit } from '@angular/core';
 
   styleUrls: ['./chat.component.css'],
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewChecked {
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   private data: any = this.transferService.getData();
   username: string = this.data.username;
   roomName: string = this.data.roomName;
@@ -41,6 +48,8 @@ export class ChatComponent implements OnInit {
       });
       this.messages = [...temp];
     });
+
+    this.scrollToBottom();
   }
 
   onClick(): void {
@@ -54,5 +63,18 @@ export class ChatComponent implements OnInit {
   onTextChange($event: any): void {
     this.messageBody = $event.target.value;
     console.log(this.messageBody, 'on messageBody change');
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.myScrollContainer.nativeElement.scrollTop =
+        this.myScrollContainer.nativeElement.scrollHeight;
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
