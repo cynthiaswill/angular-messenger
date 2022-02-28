@@ -36,10 +36,9 @@ h2 {
 
 .container {
   height: 70vh;
-  overflow-y: auto;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  width: 100%;
 }
 
 .message {

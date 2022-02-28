@@ -6,7 +6,11 @@
     </h2>
   </div>
 
-  <div class="container">
+  <div
+    class="container"
+    #scrollMe
+    [scrollTop]="messages.length === 0 ? 0 : scrollMe.scrollHeight"
+  >
     <div class="chat-message" *ngFor="let msg of messages">
       <div *ngIf="msg.username === username" class="message">
         <p class="p-left">{{ msg.messageBody }}</p>
