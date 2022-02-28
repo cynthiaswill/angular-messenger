@@ -42,12 +42,10 @@ export class HomeCompnent {
 
   onNameChange($event: any) {
     this.username = $event.target.value;
-    console.log('new username: ', this.username);
   }
 
   onRoomChange($event: any) {
     this.roomName = $event.target.value;
-    console.log('new room: ', this.roomName);
   }
 
   onClick() {

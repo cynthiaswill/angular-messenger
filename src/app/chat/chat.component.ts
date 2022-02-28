@@ -39,7 +39,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     console.log(this.messages, 'on click messags');
 
     this.socketService.socket.on('message', (data: any) => {
-      console.log(this.messages, 'messages on emitting');
       let temp = this.messages;
       temp.push({
         username: data.username,
@@ -62,7 +61,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   onTextChange($event: any): void {
     this.messageBody = $event.target.value;
-    console.log(this.messageBody, 'on messageBody change');
   }
 
   ngAfterViewChecked() {
