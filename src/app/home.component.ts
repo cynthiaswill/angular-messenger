@@ -33,7 +33,7 @@ export interface JoinedSession {
 export class HomeCompnent {
   @Input() username: string = '';
   @Input() roomName: string = '';
-  @Output() joinChat = new EventEmitter();
+  // @Output() joinChat = new EventEmitter();
   constructor(
     private transferService: TransferService,
     private socketService: SocketService,
@@ -56,7 +56,7 @@ export class HomeCompnent {
 
     if (this.username !== '' && this.roomName !== '') {
       this.socketService.socket.emit('joinRoom', data);
-      this.joinChat.emit(data);
+      // this.joinChat.emit(data);
       this.transferService.setData(data);
       this.router.navigateByUrl('chat');
     } else {
